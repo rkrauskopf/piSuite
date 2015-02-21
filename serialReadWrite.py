@@ -2,17 +2,25 @@ import serial
 import couchdb
 import datetime
 import json
+import sys
 import http.client
 
-ser = serial.Serial('/dev/tty.usbmodem1411', 9600)
-
-
-# connect to couchDB instance, in this case the db name is test_raspberry
 
 # this assumes that the couchDB server is running at the default localhost:5894 location
 couch = couchdb.Server()
 
-db = couch['test_raspberry3']
+# read config file
+try:
+    configFile = open("config.json", "r")
+    configJSON = json.loads(configFile.read())
+except:
+    print("Unexpected error:", sys.exc_info()[0])
+    raise
+
+ser = serial.Serial('/dev/tty.usbmodem1411', 9600)
+
+dbName = configJSON["database_name"]
+db = couch[dbName]
 
 hasReadingsView = False
 
@@ -38,7 +46,6 @@ while 1:
 
         # save the document to the database
         db.save(jsonObj)
-
 
         # check to see if the couchDB instance has the correct view
         # all_readings set up. This should be standard across all db instances

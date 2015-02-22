@@ -20,16 +20,14 @@ void loop(){
   String inputA = String(random(0, 10));
   String inputB = String(random(20,200));
   String inputC = String(random(0, 100));
+  String degree = String(random(0,100));  
   
   String serialString = "{\"input 1\" :" + inputA + ",";
   serialString += " \"input 2\" : " + inputB + ",";
+  serialString += " \"Degrees\" : " + degree + ",";
   serialString += "\"input 3\" : " + inputC + "}";
-  
+    
   Serial.println(serialString);
   //30 second cycle if a connection is detected.
-  delay(30000);
-  
-  
-  //2 second delay if arduino connection not deteted.
-  delay(2000);  
+  delay(10000);
 }

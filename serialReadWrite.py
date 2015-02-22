@@ -17,7 +17,7 @@ except:
     print("Unexpected error:", sys.exc_info()[0])
     raise
 
-ser = serial.Serial('/dev/tty.usbmodem1411', 9600)
+ser = serial.Serial('/dev/tty.usbmodem1451', 9600)
 
 dbName = configJSON["database_name"]
 db = couch[dbName]
@@ -57,7 +57,7 @@ while 1:
 
         if couchResponse.status == 200:
             data = couchResponse.read()
-            jsonString.decode('utf-8').rstrip()
+            jsonString = jsonString.decode('utf-8').rstrip()
             jsonObj = json.loads(jsonString)
             if jsonObj['views']['Readings']:
                 hasReadingsView = True

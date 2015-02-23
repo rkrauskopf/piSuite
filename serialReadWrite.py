@@ -40,30 +40,26 @@ while 1:
         # add the datetime to the json obj
         jsonObj['dateTime'] = dateCreated.isoformat()
 
-        # print("LOG: input 1: " + jsonObj['input 1'] + "\n" + "     input 2:  " + jsonObj['input 2'] + "\n" +
-        #      "     input 3: " + jsonObj['input 3'] + "\n" + "     dateTime: " + jsonObj['dateTime'] +
-        #      "\n--------------------")
-
         # save the document to the database
         db.save(jsonObj)
 
-        # check to see if the couchDB instance has the correct view
-        # all_readings set up. This should be standard across all db instances
-        conn = http.client.HTTPConnection('127.0.0.1', 5984, timeout=10)
-        # check to see if standard 'all_readings' exists
-        conn.request("GET", "/test_raspberry2/_design/all_readings")
-        couchResponse = conn.getresponse()
-        jsonString = couchResponse.read()
-
-        if couchResponse.status == 200:
-            data = couchResponse.read()
-            jsonString = jsonString.decode('utf-8').rstrip()
-            jsonObj = json.loads(jsonString)
-            if jsonObj['views']['Readings']:
-                hasReadingsView = True
-            else:
-                hasReadingsView = False
-
-        # setup connection
-        if hasReadingsView is False:
-            x = 'do something here'
+        # # check to see if the couchDB instance has the correct view
+        # # all_readings set up. This should be standard across all db instances
+        # conn = http.client.HTTPConnection('127.0.0.1', 5984, timeout=10)
+        # # check to see if standard 'all_readings' exists
+        # conn.request("GET", "/test_raspberry2/_design/all_readings")
+        # couchResponse = conn.getresponse()
+        # jsonString = couchResponse.read()
+        #
+        # if couchResponse.status == 200:
+        #     data = couchResponse.read()
+        #     jsonString = jsonString.decode('utf-8').rstrip()
+        #     jsonObj = json.loads(jsonString)
+        #     if jsonObj['views']['Readings']:
+        #         hasReadingsView = True
+        #     else:
+        #         hasReadingsView = False
+        #
+        # # setup connection
+        # if hasReadingsView is False:
+        #     x = 'do something here'

@@ -10,17 +10,18 @@ import http.client
 couch = couchdb.Server()
 
 # read config file
-try:
-    configFile = open("config.json", "r")
-    configJSON = json.loads(configFile.read())
-except:
-    print("Unexpected error:", sys.exc_info()[0])
-    raise
+# try:
+#     configFile = open("config.json", "r")
+#     configJSON = json.loads(configFile.read())
+# except:
+#     print("Unexpected error:", sys.exc_info()[0])
+#     raise
 
-ser = serial.Serial('/dev/tty.usbmodem1451', 9600)
+ser = serial.Serial('/dev/tty.usbmodem1411', 9600)
 
-dbName = configJSON["database_name"]
-db = couch[dbName]
+#dbName = configJSON["database_name"]
+# data base name goes here
+db = couch["test_raspberry3"]
 
 hasReadingsView = False
 
